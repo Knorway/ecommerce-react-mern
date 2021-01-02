@@ -15,7 +15,7 @@ connectDB();
 const importData = async () => {
 	try {
 		await Order.deleteMany();
-		await User.deleteMany();
+		await User.leteMany();
 		await Product.deleteMany();
 
 		const createdUser = await User.insertMany(users);
