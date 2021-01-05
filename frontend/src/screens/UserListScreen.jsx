@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { listUsers } from '../actions/userActions';
+import { deleteUser, listUsers } from '../actions/userActions';
 
 const UserListScreen = ({ history }) => {
 	const dispatch = useDispatch();
@@ -15,8 +15,13 @@ const UserListScreen = ({ history }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
+	const userDelete = useSelector((state) => state.userDelete);
+	const { success: successDelete } = userDelete;
+
 	const deleteHandler = (id) => {
-		console.log('object');
+		if (window.confirm('Are you sure you want to delete')) {
+			dispatch(deleteUser(id));
+		}
 	};
 
 	useEffect(() => {
@@ -25,7 +30,7 @@ const UserListScreen = ({ history }) => {
 		} else {
 			history.push('/login');
 		}
-	}, [dispatch, history, userInfo]);
+	}, [dispatch, history, userInfo, successDelete]);
 
 	return (
 		<>
@@ -61,7 +66,7 @@ const UserListScreen = ({ history }) => {
 									)}
 								</td>
 								<td>
-									<LinkContainer to={`/users/${user.id}/edit`}>
+									<LinkContainer to={`/users/${user._id}/edit`}>
 										<Button variant='light' className='btn-sm'>
 											<i className='fas fa-edit'></i>
 										</Button>
