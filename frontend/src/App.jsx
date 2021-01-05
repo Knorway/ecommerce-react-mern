@@ -9,8 +9,11 @@ import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import ShippingScreen from './components/ShippingScreen';
+import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
+import UserListScreen from './screens/UserListScreen';
 
 const App = () => {
 	return (
@@ -18,13 +21,23 @@ const App = () => {
 			<Header />
 			<Container>
 				<main className='py-3'>
+					<Route path='/order/:id' component={OrderScreen} />
+					<Route path='/payment' component={PaymentScreen} />
 					<Route path='/login' component={LoginScreen} />
 					<Route path='/shipping' component={ShippingScreen} />
-					<Route path='/payment' component={PaymentScreen} />
+					<Route path='/placeorder' component={PlaceOrderScreen} />
 					<Route path='/register' component={RegisterScreen} />
 					<Route path='/profile' component={ProfileScreen} />
 					<Route path='/product/:id' component={ProductScreen} />
 					<Route path='/cart/:id?' component={CartScreen} />
+					<Route path='/admin/userlist' component={UserListScreen} />
+					{/* <Route
+						path='/api/test'
+						render={() => {
+							axios.get('/api/test');
+							return;
+						}}
+					/> */}
 					<Route path='/' component={HomeScreen} exact />
 				</main>
 			</Container>

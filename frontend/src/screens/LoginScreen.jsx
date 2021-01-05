@@ -25,7 +25,6 @@ const LoginScreen = ({ location, history }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		console.log('object');
 		dispatch(login(email, password));
 	};
 
