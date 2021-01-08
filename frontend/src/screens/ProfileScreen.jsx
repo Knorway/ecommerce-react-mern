@@ -47,7 +47,9 @@ const ProfileScreen = ({ history }) => {
 		if (password !== confirmPassword) {
 			setMessage('Password does not match');
 		} else {
-			dispatch(updateUserProfile({ _id: user._id, name, email, password }));
+			dispatch(
+				updateUserProfile({ _id: user._id, name, email, password })
+			);
 		}
 	};
 
@@ -58,7 +60,9 @@ const ProfileScreen = ({ history }) => {
 
 				{error && <Message variant='danger'>{error}</Message>}
 				{message && <Message variant='danger'>{message}</Message>}
-				{success && <Message variant='success'>Profile Updated</Message>}
+				{success && (
+					<Message variant='success'>Profile Updated</Message>
+				)}
 				{loading && <Loader />}
 
 				<Form onSubmit={submitHandler}>
@@ -102,7 +106,11 @@ const ProfileScreen = ({ history }) => {
 						></Form.Control>
 					</Form.Group>
 
-					<Button type='submit' variant='primary' style={{ borderRadius: 0 }}>
+					<Button
+						type='submit'
+						variant='primary'
+						style={{ borderRadius: 0 }}
+					>
 						Update
 					</Button>
 				</Form>
@@ -114,7 +122,13 @@ const ProfileScreen = ({ history }) => {
 				) : errorOrders ? (
 					<Message variant='danger'>{errorOrders}</Message>
 				) : (
-					<Table striped bordered hover responsive className='table-sm'>
+					<Table
+						striped
+						bordered
+						hover
+						responsive
+						className='table-sm'
+					>
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -154,9 +168,15 @@ const ProfileScreen = ({ history }) => {
 									<td>
 										<LinkContainer
 											to={`/orders/${order._id}`}
-											style={{ borderRadius: 0, width: '100%' }}
+											style={{
+												borderRadius: 0,
+												width: '100%',
+											}}
 										>
-											<Button variant='light' className='btn-sm'>
+											<Button
+												variant='light'
+												className='btn-sm'
+											>
 												Details
 											</Button>
 										</LinkContainer>

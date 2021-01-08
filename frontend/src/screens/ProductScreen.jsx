@@ -4,13 +4,23 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap';
+import {
+	Row,
+	Col,
+	Image,
+	ListGroup,
+	Card,
+	Button,
+	Form,
+} from 'react-bootstrap';
 import { listProductDetail } from '../actions/productActions';
 
 const ProductScreen = ({ history, match }) => {
 	const [qty, setQty] = useState(1);
 	const dispatch = useDispatch();
-	const { loading, error, product } = useSelector((state) => state.productDetail);
+	const { loading, error, product } = useSelector(
+		(state) => state.productDetail
+	);
 	const id = match.params.id;
 
 	useEffect(() => {
@@ -23,7 +33,11 @@ const ProductScreen = ({ history, match }) => {
 
 	return (
 		<>
-			<Link to='/' className='btn btn-light my-3' style={{ borderRadius: '0' }}>
+			<Link
+				to='/'
+				className='btn btn-light my-3'
+				style={{ borderRadius: '0' }}
+			>
 				Go Back
 			</Link>
 			{loading ? (
@@ -47,8 +61,12 @@ const ProductScreen = ({ history, match }) => {
 									text={`${product.numReviews} reviews`}
 								/>
 							</ListGroup.Item>
-							<ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-							<ListGroup.Item>Description: {product.description}</ListGroup.Item>
+							<ListGroup.Item>
+								Price: ${product.price}
+							</ListGroup.Item>
+							<ListGroup.Item>
+								Description: {product.description}
+							</ListGroup.Item>
 						</ListGroup>
 					</Col>
 
@@ -68,7 +86,9 @@ const ProductScreen = ({ history, match }) => {
 									<Row>
 										<Col>Status:</Col>
 										<Col>
-											{product.countInStock ? 'In Stock' : 'Out of Stock'}
+											{product.countInStock
+												? 'In Stock'
+												: 'Out of Stock'}
 										</Col>
 									</Row>
 								</ListGroup.Item>
@@ -76,22 +96,34 @@ const ProductScreen = ({ history, match }) => {
 								{product.countInStock > 0 && (
 									<ListGroup.Item>
 										<Row>
-											<Col style={{ display: 'flex', alignItems: 'center' }}>
+											<Col
+												style={{
+													display: 'flex',
+													alignItems: 'center',
+												}}
+											>
 												Qty
 											</Col>
 											<Col>
 												<Form.Control
 													as='select'
 													value={qty}
-													onChange={(e) => setQty(e.target.value)}
+													onChange={(e) =>
+														setQty(e.target.value)
+													}
 												>
-													{[...Array(product.countInStock).keys()].map(
-														(e) => (
-															<option key={e + 1} value={e + 1}>
-																{e + 1}
-															</option>
-														)
-													)}
+													{[
+														...Array(
+															product.countInStock
+														).keys(),
+													].map((e) => (
+														<option
+															key={e + 1}
+															value={e + 1}
+														>
+															{e + 1}
+														</option>
+													))}
 												</Form.Control>
 											</Col>
 										</Row>

@@ -2,9 +2,31 @@ main {
 	min-height: 100vh;
 }
 
+/* bootstrap quick fix */
 .rating {
 	margin-bottom: 0.5rem;
 }
 .rating span:last-child {
 	margin-left: 0.3rem;
 }
+
+.table-bordered thead th {
+	border-bottom-width: 0px;
+}
+
+.table thead th {
+	vertical-align: text-bottom;
+	border-bottom: none;
+}
+
+.table td,
+.table th {
+	vertical-align: inherit;
+}
+
+.btn,
+.btn-group-sm > .btn,
+.btn-sm {
+	border-radius: 0;
+}
+/* ------------------ */
