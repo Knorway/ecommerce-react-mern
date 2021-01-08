@@ -62,8 +62,10 @@ const PlaceOrderScreen = ({ history }) => {
 							<h2>Shipping</h2>
 							<p>
 								<strong>Adress:</strong>
-								{cart.shippingAddress.address},{cart.shippingAddress.city},
-								{cart.shippingAddress.postalCode},{cart.shippingAddress.country},
+								{cart.shippingAddress.address},
+								{cart.shippingAddress.city},
+								{cart.shippingAddress.postalCode},
+								{cart.shippingAddress.country},
 							</p>
 						</ListGroup.Item>
 
@@ -93,13 +95,15 @@ const PlaceOrderScreen = ({ history }) => {
 													/>
 												</Col>
 												<Col>
-													<Link to={`/products/${item.product}`}>
+													<Link
+														to={`/products/${item.product}`}
+													>
 														{item.name}
 													</Link>
 												</Col>
 												<Col md={4}>
-													{item.qty} x ${item.price} = $
-													{item.qty * item.price}
+													{item.qty} x ${item.price} =
+													${item.qty * item.price}
 												</Col>
 											</Row>
 										</ListGroup.Item>
@@ -141,9 +145,13 @@ const PlaceOrderScreen = ({ history }) => {
 								</Row>
 							</ListGroup.Item>
 						</ListGroup>
-						<ListGroup.Item>
-							{error && <Message variant='danger'>{error}</Message>}
-						</ListGroup.Item>
+
+						{error && (
+							<ListGroup.Item>
+								<Message variant='danger'>{error}</Message>
+							</ListGroup.Item>
+						)}
+
 						<ListGroup.Item>
 							<Button
 								type='button'

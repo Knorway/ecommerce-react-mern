@@ -94,15 +94,15 @@ const ProducListScreen = ({ history, match }) => {
 						<tr>
 							<th>ID</th>
 							<th>NAME</th>
+							<th>PRICE</th>
 							<th>CATEGORY</th>
 							<th>BRAND</th>
-							<th>ADMIN</th>
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						{products.map((product) => (
-							<tr key={product.id}>
+							<tr key={product._id}>
 								<td>{product._id}</td>
 								<td>{product.name}</td>
 								<td>${product.price}</td>
