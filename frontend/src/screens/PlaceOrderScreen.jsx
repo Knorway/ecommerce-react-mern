@@ -5,6 +5,8 @@ import Message from '../components/Message';
 import Checkoutsteps from '../components/checkoutSteps';
 import { Link } from 'react-router-dom';
 import { createOrder } from '../actions/orderActions';
+import { USER_DETAILS_RESET } from '../constants/userConstants';
+import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 
 const PlaceOrderScreen = ({ history }) => {
 	const dispatch = useDispatch();
@@ -31,8 +33,9 @@ const PlaceOrderScreen = ({ history }) => {
 
 	useEffect(() => {
 		if (success) {
-			console.log(order);
 			history.push(`/order/${order._id}`);
+			dispatch({ type: USER_DETAILS_RESET });
+			dispatch({ type: ORDER_CREATE_RESET });
 		}
 
 		// eslint-disable-next-line
@@ -62,9 +65,8 @@ const PlaceOrderScreen = ({ history }) => {
 							<h2>Shipping</h2>
 							<p>
 								<strong>Adress:</strong>
-								{cart.shippingAddress.address},
-								{cart.shippingAddress.city},
-								{cart.shippingAddress.postalCode},
+								{cart.shippingAddress.address},{cart.shippingAddress.city}
+								,{cart.shippingAddress.postalCode},
 								{cart.shippingAddress.country},
 							</p>
 						</ListGroup.Item>
@@ -102,8 +104,8 @@ const PlaceOrderScreen = ({ history }) => {
 													</Link>
 												</Col>
 												<Col md={4}>
-													{item.qty} x ${item.price} =
-													${item.qty * item.price}
+													{item.qty} x ${item.price} = $
+													{item.qty * item.price}
 												</Col>
 											</Row>
 										</ListGroup.Item>

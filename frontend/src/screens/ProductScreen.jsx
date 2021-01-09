@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Meta from '../components/Meta';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap';
@@ -65,6 +66,7 @@ const ProductScreen = ({ history, match }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
+					<Meta title={product.name} />
 					<Row>
 						<Col md={6} className='mb-5'>
 							<Image src={product.image} fluid />

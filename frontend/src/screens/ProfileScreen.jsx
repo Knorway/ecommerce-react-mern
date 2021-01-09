@@ -6,6 +6,7 @@ import { getUserDetail, updateUserProfile } from '../actions/userActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listMyOrders } from '../actions/orderActions';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 const ProfileScreen = ({ history }) => {
 	const [name, setName] = useState('');
@@ -32,7 +33,8 @@ const ProfileScreen = ({ history }) => {
 		if (!userInfo) {
 			history.push('/');
 		} else {
-			if (!user.name) {
+			if (!user || !user.name || success) {
+				dispatch({ type: USER_UPDATE_PROFILE_RESET });
 				dispatch(getUserDetail('profile'));
 				dispatch(listMyOrders());
 			} else {
@@ -40,16 +42,14 @@ const ProfileScreen = ({ history }) => {
 				setEmail(user.email);
 			}
 		}
-	}, [dispatch, history, user, userInfo]);
+	}, [dispatch, history, success, user, userInfo]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
 		if (password !== confirmPassword) {
 			setMessage('Password does not match');
 		} else {
-			dispatch(
-				updateUserProfile({ _id: user._id, name, email, password })
-			);
+			dispatch(updateUserProfile({ _id: user._id, name, email, password }));
 		}
 	};
 
@@ -60,9 +60,7 @@ const ProfileScreen = ({ history }) => {
 
 				{error && <Message variant='danger'>{error}</Message>}
 				{message && <Message variant='danger'>{message}</Message>}
-				{success && (
-					<Message variant='success'>Profile Updated</Message>
-				)}
+				{success && <Message variant='success'>Profile Updated</Message>}
 				{loading && <Loader />}
 
 				<Form onSubmit={submitHandler}>
@@ -106,11 +104,7 @@ const ProfileScreen = ({ history }) => {
 						></Form.Control>
 					</Form.Group>
 
-					<Button
-						type='submit'
-						variant='primary'
-						style={{ borderRadius: 0 }}
-					>
+					<Button type='submit' variant='primary' style={{ borderRadius: 0 }}>
 						Update
 					</Button>
 				</Form>
@@ -122,20 +116,14 @@ const ProfileScreen = ({ history }) => {
 				) : errorOrders ? (
 					<Message variant='danger'>{errorOrders}</Message>
 				) : (
-					<Table
-						striped
-						bordered
-						hover
-						responsive
-						className='table-sm'
-					>
+					<Table striped bordered hover responsive className='table-sm'>
 						<thead>
 							<tr>
 								<th>ID</th>
 								<th>DATE</th>
 								<th>TOTAL</th>
 								<th>PAID</th>
-								<th>DELIVERY</th>
+								<th>DELIVERED</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -173,10 +161,7 @@ const ProfileScreen = ({ history }) => {
 												width: '100%',
 											}}
 										>
-											<Button
-												variant='light'
-												className='btn-sm'
-											>
+											<Button variant='light' className='btn-sm'>
 												Details
 											</Button>
 										</LinkContainer>
