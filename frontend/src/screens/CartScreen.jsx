@@ -38,10 +38,17 @@ const CartScreen = ({ match, location, history }) => {
 							<ListGroup.Item key={item.product}>
 								<Row>
 									<Col md={2}>
-										<Image src={item.image} alt={item.name} rounded fluid />
+										<Image
+											src={item.image}
+											alt={item.name}
+											rounded
+											fluid
+										/>
 									</Col>
 									<Col md={3}>
-										<Link to={`/product/${item.product}`}>{item.name}</Link>
+										<Link to={`/product/${item.product}`}>
+											{item.name}
+										</Link>
 									</Col>
 									<Col md={2}>${item.price}</Col>
 									<Col md={2}>
@@ -50,22 +57,29 @@ const CartScreen = ({ match, location, history }) => {
 											value={item.qty}
 											onChange={(e) =>
 												dispatch(
-													addToCart(item.product, Number(e.target.value))
+													addToCart(
+														item.product,
+														Number(e.target.value)
+													)
 												)
 											}
 										>
-											{[...Array(item.countInStock).keys()].map((e) => (
-												<option key={e + 1} value={e + 1}>
-													{e + 1}
-												</option>
-											))}
+											{[...Array(item.countInStock).keys()].map(
+												(e) => (
+													<option key={e + 1} value={e + 1}>
+														{e + 1}
+													</option>
+												)
+											)}
 										</Form.Control>
 									</Col>
 									<Col md={2}>
 										<Button
 											type='button'
 											variant='light'
-											onClick={() => removeFromCartHandler(item.product)}
+											onClick={() =>
+												removeFromCartHandler(item.product)
+											}
 										>
 											<i className='fas fa-trash'></i>
 										</Button>
@@ -81,7 +95,8 @@ const CartScreen = ({ match, location, history }) => {
 					<ListGroup variant='flush'>
 						<ListGroup.Item>
 							<h3 className='mb-3'>
-								Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
+								Subtotal (
+								{cartItems.reduce((acc, item) => acc + item.qty, 0)})
 								items
 							</h3>
 							$
